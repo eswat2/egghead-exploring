@@ -4,9 +4,7 @@ import UserProfile from './Github/UserProfile.jsx';
 import Notes from './Notes/Notes.jsx';
 import getGithubInfo from '../utils/helpers.jsx';
 
-import Rebase from 're-base';
-
-const base = Rebase.createClass('https://egghead-note-taker.firebaseio.com');
+import fauxBase from '../utils/fauxBase.jsx';
 
 class Profile extends React.Component {
 
@@ -33,39 +31,44 @@ class Profile extends React.Component {
     console.log('-- nextProps:')
     console.log(nextProps);
 
-    // this.unbind('notes');
-    base.removeBinding(this.ref);
     this.init(nextProps.params.username);
   }
 
   _init(username) {
-    this.ref = base.bindToState(`notes/${username}`, {
-      context: this,
-      asArray: true,
-      state: 'notes'
-    })
-
     getGithubInfo(username)
       .then((data) => {
-        console.log('-- response');
+        console.log('-- githubInfo');
         console.log(data);
         this.setState({
           bios: data.bios,
           repos: data.repos
         })
       });
+
+    fauxBase.get('notes', username)
+      .then((data) => {
+        console.log('-- notes');
+        console.log(data);
+        this.setState({
+          notes: data.values
+        })
+      });
   }
 
   componentWillUnmount() {
-    // hooks to unbind go here
-    base.removeBinding(this.ref);
+    // NOTE: nothing to do here...
   }
 
   _handleAddNote(newNote) {
     // update firebase with the new notes
-    base.post(`notes/${this.props.params.username}`, {
-      data: [ ...this.state.notes, newNote ]
-    });
+    fauxBase.update('notes', this.props.params.username, [ ...this.state.notes, newNote ])
+      .then((data) => {
+        console.log('-- update');
+        console.log(data);
+        this.setState({
+          notes: data.values
+        })
+      });
   }
 
   render() {
