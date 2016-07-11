@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Repos = ({repos}) => {
+  console.log('-- render:  Repos');
   return (
     <div>
       <h3>User Repos</h3>

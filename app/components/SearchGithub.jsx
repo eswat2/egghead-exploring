@@ -1,5 +1,5 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { withRouter } from 'react-router';
 
 class SearchGithub extends React.Component {
   constructor(props, context) {
@@ -17,10 +17,11 @@ class SearchGithub extends React.Component {
   _handleSubmit() {
     const user = this.input.value;
     this.input.value = '';
-    hashHistory.push(`/profile/${user}`);
+    this.props.router.push(`/profile/${user}`);
   }
 
   render() {
+    console.log('-- render:  SearchGithub');
     return (
       <div className="col-sm-12">
         <form onSubmit={this.handleSubmit}>
@@ -38,4 +39,4 @@ class SearchGithub extends React.Component {
   }
 }
 
-export default SearchGithub;
+export default withRouter(SearchGithub);

@@ -72,6 +72,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    console.log(`-- render:  Profile (${this.props.params.username})`);
     return (
     <div className="row">
       <div className="col-md-4">

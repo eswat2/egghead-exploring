@@ -2,6 +2,7 @@ import React from 'react';
 import SearchGithub from './SearchGithub.jsx'
 
 const Main = ({ children }) => {
+  console.log('-- render:  Main');
   return (
     <div className="main-container">
       <nav className="navbar navbar-default" role="navigation">
