@@ -11,6 +11,7 @@ module.exports = {
   entry: './app/App.jsx',
   devServer: {
     inline: true,
+    historyApiFallback: true,
     contentBase: __dirname,
     port: 3333
   },

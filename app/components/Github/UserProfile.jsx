@@ -5,6 +5,7 @@ const chk4num = (val) => {
 }
 
 const UserProfile = ({bios}) => {
+  console.log('-- render:  UserProfile');
   return (
     <div>
       <h3>User Profile</h3>

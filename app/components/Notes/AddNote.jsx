@@ -20,6 +20,7 @@ class AddNote extends React.Component {
   }
 
   render() {
+    console.log('-- render:  AddNote');
     return (
       <div className="input-group">
         <input
@@ -43,8 +44,8 @@ class AddNote extends React.Component {
 }
 
 AddNote.propTypes = {
- username: React.PropTypes.string.isRequired,
- addNote: React.PropTypes.func.isRequired
+  username: React.PropTypes.string.isRequired,
+  addNote: React.PropTypes.func.isRequired
 };
 
 export default AddNote;
